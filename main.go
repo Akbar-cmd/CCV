@@ -124,7 +124,7 @@ func identifyBank(bin int, banks []Bank) string {
 func validateLuhn(cardNumber string) bool {
 	sum := 0
 	// флаг для удвоения суммы
-	isSecond := false
+	shouldDouble := false
 
 	for i := len(cardNumber) - 1; i >= 0; i-- {
 
@@ -134,7 +134,7 @@ func validateLuhn(cardNumber string) bool {
 			return false
 		}
 
-		if isSecond {
+		if shouldDouble {
 			digit *= 2
 			if digit > 9 {
 				digit -= 9
@@ -142,7 +142,7 @@ func validateLuhn(cardNumber string) bool {
 		}
 
 		sum += digit
-		isSecond = !isSecond
+		shouldDouble = !shouldDouble
 	}
 
 	return sum%10 == 0
